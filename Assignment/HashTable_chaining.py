@@ -2,7 +2,7 @@ class HashTable:
     size = int(input("Enter the size of hash table: "))
     def __init__(self, size):
         self.size = size
-        self.table = [[None, None] for i in range(size)]
+        self.table = [[] for i in range(size)]
         self.a = []
 
     def gethashvalue(self, key):
@@ -11,13 +11,16 @@ class HashTable:
     def insert(self, key, value):
         h = self.gethashvalue(key)
         for i in range(self.size):
-            if self.table[h][0] is None or self.table[h][0] == key:
+            if self.table[h] is None :
                 self.table[h] = [key, value]
                 return
             else:
-                count = 0
-                self.a.append(value)
-                count+=1
+                if self.table[h][0] == key: 
+                    self.a[h] = value
+                    print("Value entered in the Array!")
+                else: 
+                    h=h+1
+                    self.a[h] = value
         return    
                 
     def search(self, key):
@@ -25,11 +28,9 @@ class HashTable:
             result = self.table[key]
             print(f"The key and value are {result}")
         else:
-            for i in range(self.a):
-                if self.a[i] == key:
-                    print(self.a[i])
-                else:
-                    print("key not found..!")
+            result = self.a[key]
+            print(f"The key and value are {result}")
+            
 
     def delete(self, key):
         if self.table[key] is None:
@@ -43,6 +44,14 @@ class HashTable:
                     print(self.a[i])
                 else:
                     print("key not found..!")
+
+
+    def display(self):
+        for i in range(self.size):
+            print(f"Index {i} : value: {self.table[i]}")
+            
+                
+
 
 t = HashTable(HashTable.size)
 while(1):
